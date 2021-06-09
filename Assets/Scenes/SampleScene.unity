@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef0db4f7a944c642b67e0284e5e4cd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 0.01
+  acceleration: 0.1
 --- !u!1 &1289952385
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef0db4f7a944c642b67e0284e5e4cd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 0.01
+  acceleration: 0.1
 --- !u!1 &1366983658
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,8 +607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a91b2fd1c017dec40a6c8455ddd98096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 1
-  resistance: 0.1
+  acceleration: 0.5
 --- !u!50 &1875964115
 Rigidbody2D:
   serializedVersion: 4

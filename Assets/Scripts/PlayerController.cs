@@ -19,7 +19,7 @@ public class PlayerController : UnitController
     void Start()
     {
         RigidBody = GetComponent<Rigidbody2D>();
-
+        CalculateMotionParams();
         transfomData.startValue = transform.localScale;
         transfomData.transformTime = 1F;
     }
@@ -83,5 +83,7 @@ public class PlayerController : UnitController
             CalculateDirection();
             Move();
         }
+
+        Breaking();
     }
 }

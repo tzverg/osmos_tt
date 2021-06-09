@@ -5,11 +5,14 @@ public class EnemyController : UnitController
     void Start()
     {
         RigidBody = GetComponent<Rigidbody2D>();
+        CalculateMotionParams();
         CalculateDirection();
     }
 
     private void FixedUpdate()
     {
-        //Move();
+        Move();
+
+        Breaking();
     }
 }

@@ -5,15 +5,13 @@ public class UnitController : MonoBehaviour, IMovable
 {
     protected Vector2 moveDirection;
 
-    private float acceleration = 0.5F;
-    private float resistance = 5F;
+    [SerializeField][Range(1,3)]
+    private float baseAcceleration = 1F;
+
+    private float acceleration;
+    private float resistance;
 
     protected Rigidbody2D RigidBody { get; set; }
-
-    private void Start()
-    {
-        //resistance = acceleration * 0.5F;
-    }
 
     virtual public void CalculateDirection()
     {
@@ -21,12 +19,18 @@ public class UnitController : MonoBehaviour, IMovable
         Vector2 randomVector = Random.insideUnitCircle;
     }
 
+    protected void CalculateMotionParams()
+    {
+        acceleration = baseAcceleration / transform.localScale.x;
+        resistance = acceleration * 0.1F;
+    }
+
     public void Move()
     {
         RigidBody.AddForce(moveDirection * acceleration, ForceMode2D.Force);
     }
 
-    private void FixedUpdate()
+    protected void Breaking()
     {
         if (Vector2.Distance(RigidBody.velocity, Vector2.zero) > 0)
         {
