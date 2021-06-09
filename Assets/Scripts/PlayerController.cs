@@ -1,27 +1,13 @@
 ﻿using UnityEngine;
 
-struct TransfomData
-{
-    public Vector3 startValue;
-    public Vector3 endValue;
-
-    public float transformTime;
-    public float transformProcess;
-}
-
 public class PlayerController : UnitController
 {
-    private bool transformScale = false;
-    private bool disableAfterTransform = false;
-
-    private TransfomData transfomData;
-
     void Start()
     {
         RigidBody = GetComponent<Rigidbody2D>();
         CalculateMotionParams();
         transfomData.startValue = transform.localScale;
-        transfomData.transformTime = 1F;
+        transfomData.transformTime = 2F;
     }
 
     override public void CalculateDirection()
@@ -37,26 +23,26 @@ public class PlayerController : UnitController
         if (targetLocalScale.x >= transform.localScale.x && targetLocalScale.y >= transform.localScale.y)
         {
             transfomData.endValue = Vector3.zero;
-            disableAfterTransform = true;
+            transfomData.disableAfterTransform = true;
         }
         else
         {
             transfomData.endValue = transform.localScale + targetLocalScale;
         }
-        transformScale = true;
+        transfomData.transformScale = true;
     }
 
-    private void UnitTransform()
+    private void UnitScale()
     {
         CalculateTransformProcess();
         gameObject.transform.localScale = Vector3.Lerp(transfomData.startValue, transfomData.endValue, transfomData.transformProcess);
 
         if (transfomData.transformProcess == 1)
         {
-            transformScale = false;
-            if (disableAfterTransform)
+            transfomData.transformScale = false;
+            if (transfomData.disableAfterTransform)
             {
-                disableAfterTransform = false;
+                transfomData.disableAfterTransform = false;
                 gameObject.SetActive(false);
             }
         }
@@ -70,7 +56,7 @@ public class PlayerController : UnitController
 
     private void Update()
     {
-        if (transformScale)
+        if (transfomData.transformScale)
         {
             UnitTransform();
         }

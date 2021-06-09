@@ -1,8 +1,21 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(CircleCollider2D))]
+public struct TransfomData
+{
+    public Vector3 startValue;
+    public Vector3 endValue;
+
+    public float transformTime;
+    public float transformProcess;
+
+    public bool transformScale;
+    public bool disableAfterTransform;
+}
+
+[RequireComponent(typeof(Rigidbody2D))]
 public class UnitController : MonoBehaviour, IMovable
 {
+    public TransfomData transfomData;
     protected Vector2 moveDirection;
 
     [SerializeField][Range(1,3)]
@@ -16,7 +29,7 @@ public class UnitController : MonoBehaviour, IMovable
     virtual public void CalculateDirection()
     {
         //moveDirection = new Vector3(UnityEngine.Random.Range(-1, 1), UnityEngine.Random.Range(-1, 1), 0F);
-        Vector2 randomVector = Random.insideUnitCircle;
+        moveDirection = Random.insideUnitCircle;
     }
 
     protected void CalculateMotionParams()
