@@ -1,21 +1,11 @@
-﻿using UnityEngine;
-
-public class CalculateDirectionTimer : MonoBehaviour
+﻿public static class CalculateDirectionTimer
 {
-    [SerializeField]
-    private float calculateDirectionStartTime;
-    [SerializeField]
-    private float calculateDirectionIntervalMinTime;
-    [SerializeField]
-    private float calculateDirectionIntervalMaxTime;
-    [SerializeField]
-    private float calculateDirectionIntervalTime;
+    public static float intervalMinTime = 1F;
+    public static float intervalMaxTime = 2F;
+    public static float intervalTime;
 
-    public float CalculateDirectionStartTime { get { return calculateDirectionStartTime; }}
-    public float CalculateDirectionIntervalTime { get { return calculateDirectionIntervalTime; }}
-
-    public void UpdateCalculateDirectionIntervalTime()
+    public static void UpdateCalculateDirectionIntervalTime()
     {
-        calculateDirectionIntervalTime = UnityEngine.Random.Range(calculateDirectionIntervalMinTime, calculateDirectionIntervalMaxTime);
+        intervalTime = UnityEngine.Random.Range(intervalMinTime, intervalMaxTime);
     }
 }

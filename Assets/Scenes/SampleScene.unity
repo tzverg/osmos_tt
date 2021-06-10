@@ -214,11 +214,11 @@ GameObject:
   - component: {fileID: 1010668658}
   - component: {fileID: 1010668657}
   - component: {fileID: 1010668656}
+  - component: {fileID: 1010668661}
   - component: {fileID: 1010668655}
   - component: {fileID: 1010668659}
-  - component: {fileID: 1010668660}
   m_Layer: 0
-  m_Name: New Sprite (1)
+  m_Name: enemy_small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,7 +318,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010668654}
   m_LocalRotation: {x: 0.01745245, y: 0, z: 0, w: 0.99984777}
-  m_LocalPosition: {x: 2, y: 2, z: 0}
+  m_LocalPosition: {x: -2.38, y: 2.33, z: -0.04}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -336,23 +336,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef0db4f7a944c642b67e0284e5e4cd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableSpeedModifiers: 0
   baseAcceleration: 1
---- !u!114 &1010668660
-MonoBehaviour:
+  resistanceModifier: 0.5
+  accelerationModifier: 0.5
+--- !u!58 &1010668661
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010668654}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 799d3bd080e2bff4198648540c90168c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  calculateDirectionStartTime: 1
-  calculateDirectionIntervalMinTime: 1
-  calculateDirectionIntervalMaxTime: 3
-  calculateDirectionIntervalTime: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &1289952385
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,11 +367,11 @@ GameObject:
   - component: {fileID: 1289952387}
   - component: {fileID: 1289952386}
   - component: {fileID: 1289952388}
+  - component: {fileID: 1289952392}
   - component: {fileID: 1289952389}
   - component: {fileID: 1289952390}
-  - component: {fileID: 1289952391}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: enemy_big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -432,7 +435,7 @@ Transform:
   m_GameObject: {fileID: 1289952385}
   m_LocalRotation: {x: 0.01745245, y: 0, z: 0, w: 0.99984777}
   m_LocalPosition: {x: 2, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -486,23 +489,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef0db4f7a944c642b67e0284e5e4cd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableSpeedModifiers: 0
   baseAcceleration: 1
---- !u!114 &1289952391
-MonoBehaviour:
+  resistanceModifier: 0.5
+  accelerationModifier: 0.5
+--- !u!58 &1289952392
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1289952385}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 799d3bd080e2bff4198648540c90168c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  calculateDirectionStartTime: 1
-  calculateDirectionIntervalMinTime: 1
-  calculateDirectionIntervalMaxTime: 3
-  calculateDirectionIntervalTime: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &1366983658
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,7 +629,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875964111}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.97, y: 1.06, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -641,7 +647,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a91b2fd1c017dec40a6c8455ddd98096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableSpeedModifiers: 0
   baseAcceleration: 3
+  resistanceModifier: 0.1
+  accelerationModifier: 0.5
 --- !u!50 &1875964115
 Rigidbody2D:
   serializedVersion: 4

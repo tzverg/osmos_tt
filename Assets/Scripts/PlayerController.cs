@@ -2,19 +2,25 @@
 
 public class PlayerController : UnitController
 {
+    private Camera mainCamera;
+
     void Awake()
     {
         RigidBody = GetComponent<Rigidbody2D>();
+        mainCamera = Camera.main;
         CalculateMotionParams();
         transfomData.startValue = transform.localScale;
         transfomData.transformTime = 2F;
     }
 
-    override public void CalculateDirection()
+    override public void CalculateTargetDirection(Vector3 targetPosition)
     {
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 direction = transform.position - mouseWorldPosition;
-        moveDirection = direction.normalized;
+        MoveDirection = (transform.position - targetPosition).normalized;
+    }
+
+    private Vector3 CalculateMousePosition()
+    {
+        return mainCamera.ScreenToWorldPoint(Input.mousePosition);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -47,7 +53,7 @@ public class PlayerController : UnitController
     {
         if (Input.GetMouseButton(0))
         {
-            CalculateDirection();
+            CalculateTargetDirection(CalculateMousePosition());
             Move();
         }
 

@@ -1,25 +1,91 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(CalculateDirectionTimer))]
+enum AIBehavior { SEARCH, HUNTING, RUNAWAY }
+
 public class EnemyController : UnitController
 {
-    private CalculateDirectionTimer timerData;
+    private AIBehavior aiBehavior;
+    private Vector2 localScale;
+    private Transform enemyTarget;
+    private float timePast;
 
     void Awake()
     {
         RigidBody = GetComponent<Rigidbody2D>();
-        timerData = GetComponent<CalculateDirectionTimer>();
+        aiBehavior = AIBehavior.SEARCH;
+        localScale = transform.localScale;
         CalculateMotionParams();
-        CalculateDirection();
-        InvokeRepeating("CalculateDirection", timerData.CalculateDirectionStartTime, timerData.CalculateDirectionIntervalTime);
+        CalculateTargetDirection(Vector3.zero);
         transfomData.startValue = transform.localScale;
         transfomData.transformTime = 2F;
+        timePast = 0;
     }
 
-    override public void CalculateDirection()
+    private void UpdateDirection()
     {
-        base.CalculateDirection();
-        timerData.UpdateCalculateDirectionIntervalTime();
+        if (aiBehavior == AIBehavior.SEARCH)
+        {
+            CalculateRandomDirection();
+            CalculateDirectionTimer.UpdateCalculateDirectionIntervalTime();
+        }
+        else
+        {
+            CalculateTargetDirection(enemyTarget.position);
+        }
+    }
+
+    override public void CalculateTargetDirection(Vector3 targertPosition)
+    {
+        switch (aiBehavior)
+        {
+            case AIBehavior.SEARCH:
+                {
+                    CalculateRandomDirection();
+                    break;
+                }
+            case AIBehavior.HUNTING:
+                {
+                    MoveDirection = (targertPosition - transform.position).normalized;
+                    break;
+                }
+            case AIBehavior.RUNAWAY:
+                {
+                    MoveDirection = (targertPosition - transform.position).normalized * -1;
+                    break;
+                }
+            default:
+                break;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<PlayerController>() != null || collision.gameObject.GetComponent<EnemyController>() != null)
+        {
+            enemyTarget = collision.transform;
+
+            if (IsBiggerThanMe(localScale, collision.transform.localScale))
+            {
+                aiBehavior = AIBehavior.RUNAWAY;
+            }
+            else
+            {
+                aiBehavior = AIBehavior.HUNTING;
+            }
+
+            enableSpeedModifiers = true;
+            CalculateTargetDirection(enemyTarget.position);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.transform.Equals(enemyTarget))
+        {
+            aiBehavior = AIBehavior.SEARCH;
+            enableSpeedModifiers = false;
+            CalculateTargetDirection(Vector3.zero);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -50,6 +116,12 @@ public class EnemyController : UnitController
 
     private void FixedUpdate()
     {
+        timePast += Time.fixedDeltaTime;
+        if (timePast > CalculateDirectionTimer.intervalTime)
+        {
+            UpdateDirection();
+            timePast = 0;
+        }
         Move();
 
         Breaking();

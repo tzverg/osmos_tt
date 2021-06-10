@@ -2,6 +2,9 @@
 
 interface IMovable
 {
+    Vector3 MoveDirection { get; set; }
+
     void Move();
-    void CalculateDirection();
+    void CalculateRandomDirection();
+    void CalculateTargetDirection(Vector3 targetPosition);
 }
