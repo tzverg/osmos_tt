@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 1010668656}
   - component: {fileID: 1010668655}
   - component: {fileID: 1010668659}
+  - component: {fileID: 1010668660}
   m_Layer: 0
   m_Name: New Sprite (1)
   m_TagString: Untagged
@@ -336,6 +337,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseAcceleration: 1
+--- !u!114 &1010668660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010668654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799d3bd080e2bff4198648540c90168c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  calculateDirectionStartTime: 1
+  calculateDirectionIntervalMinTime: 1
+  calculateDirectionIntervalMaxTime: 3
+  calculateDirectionIntervalTime: 0
 --- !u!1 &1289952385
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,6 +366,7 @@ GameObject:
   - component: {fileID: 1289952388}
   - component: {fileID: 1289952389}
   - component: {fileID: 1289952390}
+  - component: {fileID: 1289952391}
   m_Layer: 0
   m_Name: New Sprite
   m_TagString: Untagged
@@ -469,6 +487,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseAcceleration: 1
+--- !u!114 &1289952391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289952385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799d3bd080e2bff4198648540c90168c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  calculateDirectionStartTime: 1
+  calculateDirectionIntervalMinTime: 1
+  calculateDirectionIntervalMaxTime: 3
+  calculateDirectionIntervalTime: 0
 --- !u!1 &1366983658
 GameObject:
   m_ObjectHideFlags: 0

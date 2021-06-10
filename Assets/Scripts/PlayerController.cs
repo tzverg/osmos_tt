@@ -2,7 +2,7 @@
 
 public class PlayerController : UnitController
 {
-    void Start()
+    void Awake()
     {
         RigidBody = GetComponent<Rigidbody2D>();
         CalculateMotionParams();
