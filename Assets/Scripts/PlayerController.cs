@@ -28,15 +28,17 @@ public class PlayerController : UnitController
         if (collision.gameObject.GetComponent<EnemyController>() != null)
         {
             Vector3 targetLocalScale = collision.transform.localScale;
-            if (targetLocalScale.x <= transform.localScale.x && targetLocalScale.y <= transform.localScale.y)
-            {
-                transfomData.endValue = transform.localScale + targetLocalScale;
-            }
-            else
+
+            if (IsBiggerThanMe(targetLocalScale))
             {
                 transfomData.endValue = Vector3.zero;
                 transfomData.disableAfterTransform = true;
             }
+            else
+            {
+                transfomData.endValue = transform.localScale + targetLocalScale;
+            }
+
             transfomData.transformScale = true;
         }
     }

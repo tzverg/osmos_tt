@@ -96,7 +96,7 @@ public class UnitController : MonoBehaviour, IMovable
         {
             if (enableSpeedModifiers)
             {
-                RigidBody.AddForce(-RigidBody.velocity * (resistance + resistanceModifier), ForceMode2D.Force);
+                RigidBody?.AddForce(-RigidBody.velocity * (resistance + resistanceModifier), ForceMode2D.Force);
             }
             else
             {
@@ -105,8 +105,9 @@ public class UnitController : MonoBehaviour, IMovable
         }
     }
 
-    protected bool IsBiggerThanMe(Vector3 unitLocalScale, Vector3 targetLocalScale)
+    protected bool IsBiggerThanMe(Vector3 targetLocalScale)
     {
+        Vector3 unitLocalScale = transform.localScale;
         return targetLocalScale.x > unitLocalScale.x && targetLocalScale.y > unitLocalScale.y;
     }
 }

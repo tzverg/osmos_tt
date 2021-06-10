@@ -5,7 +5,6 @@ enum AIBehavior { SEARCH, HUNTING, RUNAWAY }
 public class EnemyController : UnitController
 {
     private AIBehavior aiBehavior;
-    private Vector2 localScale;
     private Transform enemyTarget;
     private float timePast;
 
@@ -13,7 +12,6 @@ public class EnemyController : UnitController
     {
         RigidBody = GetComponent<Rigidbody2D>();
         aiBehavior = AIBehavior.SEARCH;
-        localScale = transform.localScale;
         CalculateMotionParams();
         CalculateTargetDirection(Vector3.zero);
         transfomData.startValue = transform.localScale;
@@ -64,7 +62,7 @@ public class EnemyController : UnitController
         {
             enemyTarget = collision.transform;
 
-            if (IsBiggerThanMe(localScale, collision.transform.localScale))
+            if (IsBiggerThanMe(collision.transform.localScale))
             {
                 aiBehavior = AIBehavior.RUNAWAY;
             }
@@ -93,14 +91,14 @@ public class EnemyController : UnitController
         if (collision.gameObject.GetComponent<PlayerController>() != null || collision.gameObject.GetComponent<EnemyController>() != null)
         {
             Vector3 targetLocalScale = collision.transform.localScale;
-            if (targetLocalScale.x <= transform.localScale.x && targetLocalScale.y <= transform.localScale.y)
-            {
-                transfomData.endValue = transform.localScale + targetLocalScale;
-            }
-            else
+            if(IsBiggerThanMe(targetLocalScale))
             {
                 transfomData.endValue = Vector3.zero;
                 transfomData.disableAfterTransform = true;
+            }
+            else
+            {
+                transfomData.endValue = transform.localScale + targetLocalScale;
             }
             transfomData.transformScale = true;
         }
