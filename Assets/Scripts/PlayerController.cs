@@ -19,46 +19,27 @@ public class PlayerController : UnitController
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Vector3 targetLocalScale = collision.transform.localScale;
-        if (targetLocalScale.x >= transform.localScale.x && targetLocalScale.y >= transform.localScale.y)
+        if (collision.gameObject.GetComponent<EnemyController>() != null)
         {
-            transfomData.endValue = Vector3.zero;
-            transfomData.disableAfterTransform = true;
-        }
-        else
-        {
-            transfomData.endValue = transform.localScale + targetLocalScale;
-        }
-        transfomData.transformScale = true;
-    }
-
-    private void UnitScale()
-    {
-        CalculateTransformProcess();
-        gameObject.transform.localScale = Vector3.Lerp(transfomData.startValue, transfomData.endValue, transfomData.transformProcess);
-
-        if (transfomData.transformProcess == 1)
-        {
-            transfomData.transformScale = false;
-            if (transfomData.disableAfterTransform)
+            Vector3 targetLocalScale = collision.transform.localScale;
+            if (targetLocalScale.x <= transform.localScale.x && targetLocalScale.y <= transform.localScale.y)
             {
-                transfomData.disableAfterTransform = false;
-                gameObject.SetActive(false);
+                transfomData.endValue = transform.localScale + targetLocalScale;
             }
+            else
+            {
+                transfomData.endValue = Vector3.zero;
+                transfomData.disableAfterTransform = true;
+            }
+            transfomData.transformScale = true;
         }
-    }
-
-    private void CalculateTransformProcess()
-    {
-        transfomData.transformProcess += transfomData.transformTime * Time.deltaTime;
-        transfomData.transformProcess = Mathf.Clamp01(transfomData.transformProcess + transfomData.transformTime * Time.deltaTime);
     }
 
     private void Update()
     {
         if (transfomData.transformScale)
         {
-            UnitTransform();
+            UnitScale();
         }
     }
 

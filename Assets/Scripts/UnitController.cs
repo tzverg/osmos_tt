@@ -38,6 +38,28 @@ public class UnitController : MonoBehaviour, IMovable
         resistance = acceleration * 0.1F;
     }
 
+    protected void UnitScale()
+    {
+        CalculateTransformProcess();
+        gameObject.transform.localScale = Vector3.Lerp(transfomData.startValue, transfomData.endValue, transfomData.transformProcess);
+
+        if (transfomData.transformProcess == 1)
+        {
+            transfomData.transformScale = false;
+            if (transfomData.disableAfterTransform)
+            {
+                transfomData.disableAfterTransform = false;
+                gameObject.SetActive(false);
+            }
+        }
+    }
+
+    private void CalculateTransformProcess()
+    {
+        transfomData.transformProcess += transfomData.transformTime * Time.deltaTime;
+        transfomData.transformProcess = Mathf.Clamp01(transfomData.transformProcess + transfomData.transformTime * Time.deltaTime);
+    }
+
     public void Move()
     {
         RigidBody.AddForce(moveDirection * acceleration, ForceMode2D.Force);
