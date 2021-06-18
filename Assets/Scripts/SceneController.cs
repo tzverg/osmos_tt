@@ -2,13 +2,36 @@
 
 public class SceneController : MonoBehaviour
 {
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private PoolSetup poolSetup;
+    [SerializeField] private int gridSizeX;
+    [SerializeField] private int gridSizeY;
+
+    private Vector2[] gridVerticies;
+
     private Camera orthoCamera;
 
-    void Start()
+    void Awake()
     {
         orthoCamera = Camera.main;
 
         CreateSceneEdgeCollider();
+    }
+
+    private void CreateEnemyList()
+    {
+        
+    }
+
+    private void CreateGenerationGrid(Vector2[] borderVerticies)
+    {
+        for (int cntX = 0; cntX < gridSizeX; cntX++)
+        {
+            for (int cntY = 0; cntY < gridSizeY; cntY++)
+            {
+
+            }
+        }
     }
 
     private void CreateSceneEdgeCollider()
